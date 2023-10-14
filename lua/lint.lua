@@ -217,11 +217,11 @@ function M.lint(linter, opts)
   assert(cmd, 'Linter definition must have a `cmd` set: ' .. vim.inspect(linter))
   handle, pid_or_err = uv.spawn(cmd, linter_opts, function(code)
     if handle and not handle:is_closing() then
-      local procs = (running_procs_by_buf[bufnr] or {})
-      procs[linter.name] = nil
-      if not next(procs) then
-        running_procs_by_buf[bufnr] = nil
-      end
+      -- local procs = (running_procs_by_buf[bufnr] or {})
+      -- procs[linter.name] = nil
+      -- if not next(procs) then
+      --   running_procs_by_buf[bufnr] = nil
+      -- end
       handle:close()
     end
     if code ~= 0 and not linter.ignore_exitcode then
